@@ -15,11 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from .yasg import urlpatterns_yasg
+from laptop.views import *
+from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth', include('rest_framework.urls')),
     path('api/v1/auth/', include('djoser.urls')),
     path('api/v1/auth_token/', include('djoser.urls.authtoken')),
-    path('api/', include('laptop.urls'))
-]
+    path('api/', include('laptop.urls')),
+    url('', include('social_django.urls', namespace='social')),
+    path('oauth/', oauth),
+] + urlpatterns_yasg

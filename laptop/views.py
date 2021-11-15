@@ -5,6 +5,11 @@ from .models import Laptop
 from .permissions import *
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.authentication import TokenAuthentication, SessionAuthentication
+from django.shortcuts import render
+
+def oauth(request):
+    return render(request, 'oauth.html')
+
 
 class LaptopCreateView(generics.CreateAPIView):
     serializer_class = LaptopAllSerializers
@@ -19,4 +24,6 @@ class LaptopDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = LaptopAllSerializers
     queryset = Laptop.objects.all()
     permission_classes = (IsOwnerOrReadOnly, IsAuthenticated)
-    authentication_classes = (TokenAuthentication, SessionAuthentication)
+    # authentication_classes = (TokenAuthentication, SessionAuthentication)
+
+
